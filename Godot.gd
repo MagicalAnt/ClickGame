@@ -4,6 +4,7 @@ var score: int = 0
 var MAX_SCORE = 10
 
 signal win
+signal lost
 
 func _input_event(viewport, event, shape_idx):
 	#print(event)
@@ -13,6 +14,7 @@ func _input_event(viewport, event, shape_idx):
 		if (score == MAX_SCORE):
 			self.hide()
 			emit_signal("win")
+			$"Timer".stop()
 		
 	
 # Called when the node enters the scene tree for the first time.
@@ -23,3 +25,9 @@ func _input_event(viewport, event, shape_idx):
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 	#pass
+
+
+func _on_timer_timeout():
+	emit_signal("lost")
+	self.hide()
+#	pass # Replace with function body.

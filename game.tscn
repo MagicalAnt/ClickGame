@@ -24,6 +24,13 @@ position = Vector2(1, -7)
 texture = ExtResource("1_wa012")
 metadata/_edit_group_ = true
 
+[node name="Timer" type="Timer" parent="Godot"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
 [node name="WinLoseLabels" parent="." instance=ExtResource("3_nv6e2")]
 
+[connection signal="lost" from="Godot" to="WinLoseLabels" method="_on_lost"]
 [connection signal="win" from="Godot" to="WinLoseLabels" method="_on_win"]
+[connection signal="timeout" from="Godot/Timer" to="Godot" method="_on_timer_timeout"]
