@@ -57,6 +57,7 @@ func _on_animated_sprite_2d_animation_finished():
 			$"AnimatedSprite2D".play("death")
 			$"Timer".stop()
 			emit_signal("win")
+			
 	elif ($"AnimatedSprite2D".get_animation() == "death"):
 		$"AnimatedSprite2D".play("idle")
 

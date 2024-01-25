@@ -29,3 +29,7 @@ func _on_lost():
 #
 #func _on_godot_lost():
 	#pass # Replace with function body.
+
+
+func _on_godot_lost():
+	pass # Replace with function body.
