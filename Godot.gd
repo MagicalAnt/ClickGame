@@ -21,8 +21,8 @@ func _input_event(viewport, event, shape_idx):
 		score = score +1
 		#_rand_position()
 		#print("Animaiton is: " + $"AnimatedSprite2D".get_animation())
-		#if (score == MAX_SCORE):
-			#$"Timer".stop()
+		if (score == MAX_SCORE):
+			$"Timer".stop()
 		
 	
 # Called when the node enters the scene tree for the first time.
@@ -55,7 +55,7 @@ func _on_animated_sprite_2d_animation_finished():
 			$"AnimatedSprite2D".play("idle")
 		else:
 			$"AnimatedSprite2D".play("death")
-			$"Timer".stop()
+			#$"Timer".stop()
 			emit_signal("win")
 			
 	#elif ($"AnimatedSprite2D".get_animation() == "death"):
