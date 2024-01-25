@@ -5,7 +5,7 @@ var random = RandomNumberGenerator.new()
 #var randY = random.randi_range(20,100)
 
 var score: int = 0
-var MAX_SCORE = 3
+var MAX_SCORE = 5
 
 signal win
 signal lost
@@ -16,7 +16,7 @@ func _ready():
 func _input_event(viewport, event, shape_idx):
 	#print(event)
 	#if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
-	if (event.is_action_pressed("click")):
+	if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
 		$"AnimatedSprite2D".play("hurt")
 		score = score +1
 		#_rand_position()
@@ -42,8 +42,8 @@ func _on_timer_timeout():
 
 func _rand_position():
 	random.randomize()
-	var randX = random.randi_range(20,get_viewport_rect().size.x -20)
-	var randY = random.randi_range(20,get_viewport_rect().size.y - 20)
+	var randX = random.randi_range(20,get_viewport_rect().size.x -50)
+	var randY = random.randi_range(20,get_viewport_rect().size.y - 50)
 	self.set_global_position(Vector2(randX, randY))
 	
 
@@ -58,6 +58,6 @@ func _on_animated_sprite_2d_animation_finished():
 			$"Timer".stop()
 			emit_signal("win")
 			
-	elif ($"AnimatedSprite2D".get_animation() == "death"):
-		$"AnimatedSprite2D".play("idle")
+	#elif ($"AnimatedSprite2D".get_animation() == "death"):
+		#$"AnimatedSprite2D".play("idle")
 

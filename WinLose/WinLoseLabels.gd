@@ -1,5 +1,5 @@
 extends Node
-# anthony is here!
+
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -23,7 +23,6 @@ func _on_lost():
 
 
 
-#func _on_godot_win():
 	#pass # Replace with function body.
 #
 #
@@ -31,5 +30,3 @@ func _on_lost():
 	#pass # Replace with function body.
 
 
-func _on_godot_lost():
-	pass # Replace with function body.
