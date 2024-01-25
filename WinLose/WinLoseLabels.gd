@@ -21,3 +21,11 @@ func _on_win():
 func _on_lost():
 	$"Lose Label".show()
 
+
+
+#func _on_godot_win():
+	#pass # Replace with function body.
+#
+#
+#func _on_godot_lost():
+	#pass # Replace with function body.

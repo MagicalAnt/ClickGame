@@ -1,36 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciytkjlsdjkil"]
+[gd_scene load_steps=3 format=3 uid="uid://ciytkjlsdjkil"]
 
-[ext_resource type="Script" path="res://Godot.gd" id="1_bp5mn"]
-[ext_resource type="Texture2D" uid="uid://go08be30ma4v" path="res://icon.svg" id="1_wa012"]
+[ext_resource type="PackedScene" uid="uid://cdqkp3t2skxjd" path="res://Godot/godot.tscn" id="1_3eh08"]
 [ext_resource type="PackedScene" uid="uid://stb1i1dmhx7j" path="res://WinLose/WinLoseLabels.tscn" id="3_nv6e2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iity4"]
-size = Vector2(129, 113.5)
 
 [node name="Game" type="Node2D"]
 metadata/_edit_lock_ = true
 
-[node name="Godot" type="Area2D" parent="."]
-position = Vector2(588, 288)
-script = ExtResource("1_bp5mn")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Godot"]
-position = Vector2(1.5, -2.75)
-shape = SubResource("RectangleShape2D_iity4")
-
-[node name="Sprite2D" type="Sprite2D" parent="Godot"]
-position = Vector2(1, -7)
-texture = ExtResource("1_wa012")
-metadata/_edit_group_ = true
-
-[node name="Timer" type="Timer" parent="Godot"]
-wait_time = 3.0
-one_shot = true
-autostart = true
+[node name="Godot" parent="." instance=ExtResource("1_3eh08")]
 
 [node name="WinLoseLabels" parent="." instance=ExtResource("3_nv6e2")]
 
 [connection signal="lost" from="Godot" to="WinLoseLabels" method="_on_lost"]
 [connection signal="win" from="Godot" to="WinLoseLabels" method="_on_win"]
-[connection signal="timeout" from="Godot/Timer" to="Godot" method="_on_timer_timeout"]

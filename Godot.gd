@@ -5,7 +5,7 @@ var random = RandomNumberGenerator.new()
 #var randY = random.randi_range(20,100)
 
 var score: int = 0
-var MAX_SCORE = 10
+var MAX_SCORE = 3
 
 signal win
 signal lost
