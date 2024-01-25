@@ -18,12 +18,14 @@ func _input_event(viewport, event, shape_idx):
 	#if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
 	if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
 		$"AnimatedSprite2D".play("hurt")
+		$"HurtSound".play()
 		score = score +1
 		if (score < MAX_SCORE):
 			$"AnimationPlayer".play("Teleport")
 		#_rand_position()
 		#print("Animaiton is: " + $"AnimatedSprite2D".get_animation())
 		if (score == MAX_SCORE):
+			$"WinSound".play()
 			$"Timer".stop()
 		
 	
@@ -39,6 +41,7 @@ func _input_event(viewport, event, shape_idx):
 
 func _on_timer_timeout():
 	emit_signal("lost")
+	$"LostSound".play()
 	self.hide()
 #	pass # Replace with function body.
 

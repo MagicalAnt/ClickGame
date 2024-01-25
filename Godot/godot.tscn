@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdqkp3t2skxjd"]
+[gd_scene load_steps=19 format=3 uid="uid://cdqkp3t2skxjd"]
 
 [ext_resource type="Script" path="res://Godot.gd" id="1_hgwia"]
 [ext_resource type="Texture2D" uid="uid://c7speybr5t5h8" path="res://Godot/Alien/blue__0018_hurt_1.png" id="2_5ld47"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://de1o86tlthk1i" path="res://Godot/Alien/blue__0021_hurt_4.png" id="5_b1y8h"]
 [ext_resource type="Texture2D" uid="uid://pxt4e2bhx55j" path="res://Godot/Alien/blue__0023_dead_2.png" id="5_qvwac"]
 [ext_resource type="Texture2D" uid="uid://bqkfdl71iqgu5" path="res://Godot/Alien/blue__0026_dead_5.png" id="6_po8sb"]
+[ext_resource type="AudioStream" uid="uid://clqlsxbxlli1r" path="res://Godot/Sounds/Random2.wav" id="12_nub10"]
+[ext_resource type="AudioStream" uid="uid://cbw7rbpdq355c" path="res://Godot/Sounds/Lose4.wav" id="13_ntbcv"]
+[ext_resource type="AudioStream" uid="uid://pdf0fb05ybn8" path="res://Godot/Sounds/Lose3.wav" id="14_x71mo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iity4"]
 size = Vector2(64, 117)
@@ -106,6 +109,15 @@ animation = &"idle"
 libraries = {
 "": SubResource("AnimationLibrary_js0mh")
 }
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_nub10")
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ntbcv")
+
+[node name="LostSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_x71mo")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
