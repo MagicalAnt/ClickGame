@@ -20,7 +20,7 @@ func _input_event(viewport, event, shape_idx):
 		$"AnimatedSprite2D".play("hurt")
 		score = score +1
 		#_rand_position()
-		print("Animaiton is: " + $"AnimatedSprite2D".get_animation())
+		#print("Animaiton is: " + $"AnimatedSprite2D".get_animation())
 		#if (score == MAX_SCORE):
 			#$"Timer".stop()
 		
