@@ -1,10 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdqkp3t2skxjd"]
+[gd_scene load_steps=14 format=3 uid="uid://cdqkp3t2skxjd"]
 
 [ext_resource type="Script" path="res://Godot.gd" id="1_hgwia"]
-[ext_resource type="Texture2D" uid="uid://go08be30ma4v" path="res://icon.svg" id="2_1radx"]
+[ext_resource type="Texture2D" uid="uid://c7speybr5t5h8" path="res://Godot/Alien/blue__0018_hurt_1.png" id="2_5ld47"]
+[ext_resource type="Texture2D" uid="uid://dj4pniwa7ux2p" path="res://Godot/Alien/blue__0022_dead_1.png" id="2_inkre"]
+[ext_resource type="Texture2D" uid="uid://c5lea8l1g0du" path="res://Godot/Alien/blue__0000_idle_1.png" id="2_r3pxx"]
+[ext_resource type="Texture2D" uid="uid://chqntoanj3sjm" path="res://Godot/Alien/blue__0019_hurt_2.png" id="3_80kty"]
+[ext_resource type="Texture2D" uid="uid://c0rbvye6kt1ol" path="res://Godot/Alien/blue__0024_dead_3.png" id="3_l4yo6"]
+[ext_resource type="Texture2D" uid="uid://dqo0d1fy1ltxj" path="res://Godot/Alien/blue__0020_hurt_3.png" id="4_13265"]
+[ext_resource type="Texture2D" uid="uid://ccyga15wc0jnq" path="res://Godot/Alien/blue__0025_dead_4.png" id="4_rh6rg"]
+[ext_resource type="Texture2D" uid="uid://de1o86tlthk1i" path="res://Godot/Alien/blue__0021_hurt_4.png" id="5_b1y8h"]
+[ext_resource type="Texture2D" uid="uid://pxt4e2bhx55j" path="res://Godot/Alien/blue__0023_dead_2.png" id="5_qvwac"]
+[ext_resource type="Texture2D" uid="uid://bqkfdl71iqgu5" path="res://Godot/Alien/blue__0026_dead_5.png" id="6_po8sb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iity4"]
-size = Vector2(129, 113.5)
+size = Vector2(64, 117)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijgu6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_inkre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l4yo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rh6rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qvwac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_po8sb")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5ld47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_80kty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_13265")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b1y8h")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r3pxx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="Godot" type="Area2D"]
 position = Vector2(588, 288)
@@ -12,17 +69,20 @@ script = ExtResource("1_hgwia")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, -2.75)
+position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_iity4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -7)
-texture = ExtResource("2_1radx")
-metadata/_edit_group_ = true
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_ijgu6")
+animation = &"hurt"
+frame = 3
+frame_progress = 1.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

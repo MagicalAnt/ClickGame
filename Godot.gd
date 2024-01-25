@@ -15,14 +15,14 @@ func _ready():
 
 func _input_event(viewport, event, shape_idx):
 	#print(event)
+	#if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
 	if (event.is_action_pressed("click")):
+		$"AnimatedSprite2D".play("hurt")
 		score = score +1
-		_rand_position()
-		print(score)
-		if (score == MAX_SCORE):
-			self.hide()
-			emit_signal("win")
-			$"Timer".stop()
+		#_rand_position()
+		print("Animaiton is: " + $"AnimatedSprite2D".get_animation())
+		#if (score == MAX_SCORE):
+			#$"Timer".stop()
 		
 	
 # Called when the node enters the scene tree for the first time.
@@ -46,3 +46,17 @@ func _rand_position():
 	var randY = random.randi_range(20,get_viewport_rect().size.y - 20)
 	self.set_global_position(Vector2(randX, randY))
 	
+
+
+func _on_animated_sprite_2d_animation_finished():
+	if($"AnimatedSprite2D".get_animation() == "hurt"):
+		if (score <MAX_SCORE):
+			_rand_position()
+			$"AnimatedSprite2D".play("idle")
+		else:
+			$"AnimatedSprite2D".play("death")
+			$"Timer".stop()
+			emit_signal("win")
+	elif ($"AnimatedSprite2D".get_animation() == "death"):
+		$"AnimatedSprite2D".play("idle")
+
