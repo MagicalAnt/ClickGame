@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciytkjlsdjkil"]
+[gd_scene load_steps=9 format=3 uid="uid://ciytkjlsdjkil"]
 
 [ext_resource type="PackedScene" uid="uid://cdqkp3t2skxjd" path="res://Godot/godot.tscn" id="1_3eh08"]
+[ext_resource type="Texture2D" uid="uid://cp8kb72qytph6" path="res://assets/image/dices.png" id="3_4l2ws"]
 [ext_resource type="PackedScene" uid="uid://stb1i1dmhx7j" path="res://WinLose/WinLoseLabels.tscn" id="3_nv6e2"]
+[ext_resource type="Script" path="res://Dice.gd" id="4_mey8w"]
+[ext_resource type="AudioStream" uid="uid://j65gae0mhg61" path="res://assets/sound/dice4.wav" id="5_08i4m"]
+[ext_resource type="AudioStream" uid="uid://imrymay3l8cv" path="res://assets/sound/dice3.wav" id="6_lrrag"]
+[ext_resource type="AudioStream" uid="uid://4tl04c7ue0we" path="res://assets/sound/dice1.wav" id="7_4mpvu"]
+[ext_resource type="AudioStream" uid="uid://b87jov530ft3e" path="res://assets/sound/dice2.wav" id="8_h65g8"]
 
 [node name="Game" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -10,5 +16,34 @@ metadata/_edit_lock_ = true
 
 [node name="WinLoseLabels" parent="." instance=ExtResource("3_nv6e2")]
 
+[node name="Dice" type="Sprite2D" parent="."]
+position = Vector2(510, 330)
+scale = Vector2(2, 2)
+texture = ExtResource("3_4l2ws")
+hframes = 3
+vframes = 2
+script = ExtResource("4_mey8w")
+
+[node name="DiceMusic4" type="AudioStreamPlayer" parent="Dice"]
+stream = ExtResource("5_08i4m")
+
+[node name="DiceMusic3" type="AudioStreamPlayer" parent="Dice"]
+stream = ExtResource("6_lrrag")
+
+[node name="DiceMusic1" type="AudioStreamPlayer" parent="Dice"]
+stream = ExtResource("7_4mpvu")
+
+[node name="DiceMusic2" type="AudioStreamPlayer" parent="Dice"]
+stream = ExtResource("8_h65g8")
+
+[node name="DiceButton" type="Button" parent="Dice"]
+offset_left = -51.0
+offset_top = -64.5
+offset_right = 58.0
+offset_bottom = -33.5
+text = "Roll the Dice!"
+
 [connection signal="lost" from="Godot" to="WinLoseLabels" method="_on_lost"]
+[connection signal="rollTheDice" from="Godot" to="Dice" method="_on_roll_the_dice"]
 [connection signal="win" from="Godot" to="WinLoseLabels" method="_on_win"]
+[connection signal="pressed" from="Dice/DiceButton" to="Dice" method="_on_dice_button_pressed"]

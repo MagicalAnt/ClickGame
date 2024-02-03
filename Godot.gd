@@ -9,6 +9,7 @@ var MAX_SCORE = 5
 
 signal win
 signal lost
+signal rollTheDice
 
 func _ready():
 	_rand_position()
@@ -16,7 +17,9 @@ func _ready():
 func _input_event(viewport, event, shape_idx):
 	#print(event)
 	#if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
+
 	if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
+		#emit_signal("rollTheDice")
 		$"AnimatedSprite2D".play("hurt")
 		$"HurtSound".play()
 		score = score +1
@@ -27,6 +30,7 @@ func _input_event(viewport, event, shape_idx):
 		if (score == MAX_SCORE):
 			$"WinSound".play()
 			$"Timer".stop()
+
 		
 	
 # Called when the node enters the scene tree for the first time.
@@ -70,4 +74,6 @@ func _on_animation_player_animation_finished(anim_name):
 			_rand_position()
 			$"AnimatedSprite2D".play("idle")
 			$"AnimationPlayer".play("Teleport", -1,-1, true)
+			
+
 
