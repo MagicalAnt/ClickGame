@@ -5,14 +5,17 @@ var random = RandomNumberGenerator.new()
 #var randY = random.randi_range(20,100)
 
 var score: int = 0
-var MAX_SCORE = 5
+var MAX_SCORE = 3
 
 signal win
-signal lost
-signal rollTheDice
+#signal lost
+#signal rollTheDice
 
 func _ready():
-	_rand_position()
+	#_rand_position()
+	#get_viewport().size()
+	$"AnimatedSprite2D/quoteLabel".set_global_position(get_viewport_rect().get_center())
+	get_parent().get_node("Dice").visible = false
 
 func _input_event(viewport, event, shape_idx):
 	#print(event)
@@ -20,6 +23,7 @@ func _input_event(viewport, event, shape_idx):
 
 	if (event.is_action_pressed("click") and $"AnimatedSprite2D".get_animation() == "idle"):
 		#emit_signal("rollTheDice")
+		$AnimatedSprite2D/quoteLabel.visible =false # only shows the quote when first showing the alien
 		$"AnimatedSprite2D".play("hurt")
 		$"HurtSound".play()
 		score = score +1
@@ -30,6 +34,7 @@ func _input_event(viewport, event, shape_idx):
 		if (score == MAX_SCORE):
 			$"WinSound".play()
 			$"Timer".stop()
+
 
 		
 	
@@ -63,6 +68,8 @@ func _on_animated_sprite_2d_animation_finished():
 			$"AnimatedSprite2D".play("death")
 			#$"Timer".stop()
 			emit_signal("win")
+			get_parent().get_node("Dice").visible = true
+			$AnimatedSprite2D.visible = false;
 			
 	#elif ($"AnimatedSprite2D".get_animation() == "death"):
 		#$"AnimatedSprite2D".play("idle")
