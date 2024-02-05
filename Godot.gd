@@ -8,7 +8,7 @@ var score: int = 0
 var MAX_SCORE = 3
 
 signal win
-#signal lost
+signal lost
 #signal rollTheDice
 
 func _ready():

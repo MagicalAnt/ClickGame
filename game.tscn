@@ -13,6 +13,7 @@ metadata/_edit_lock_ = true
 
 [node name="Dice" parent="." instance=ExtResource("3_4x6vj")]
 
+[connection signal="lost" from="Godot" to="WinLoseLabels" method="_on_lost"]
 [connection signal="win" from="Godot" to="WinLoseLabels" method="_on_godot_win"]
 [connection signal="diceLose" from="Dice" to="WinLoseLabels" method="_on_lost"]
 [connection signal="diceTie" from="Dice" to="WinLoseLabels" method="_on_dice_tie"]
